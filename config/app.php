@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'chatbotsai.loc'),
+    'url' => env('APP_URL', 'localhots'),
 
     'asset_url' => env('ASSET_URL', null),
 
