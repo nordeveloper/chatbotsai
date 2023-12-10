@@ -17,9 +17,10 @@ class CreateCharactersTable extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->string('name');
-            $table->string('code_name');
+            $table->string('code');
             $table->string('image')->nullable();
-            $table->string('system_prompt')->nullable();
+            $table->text('prompt')->nullable();
+            $table->text('nswf')->nullable();
             $table->timestamps();
         });
     }

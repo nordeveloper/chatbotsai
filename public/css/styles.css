@@ -4,7 +4,7 @@
   }
 
   * {
-    outline: none !important;
+    outline: none;
   }
 
   label {
@@ -32,7 +32,7 @@
 
   .user-profile{
     max-width: 500px;
-    margin: 0 auto;
+    margin: auto;
   }
 
 
@@ -119,13 +119,13 @@
   }
 
   .char-icon {
-    width: 135px;
+    min-width: 135px;
+    max-width: 170px;
     display: flex;
     font-weight: bold;
     overflow: hidden;
     text-align: center;
     color: #fff;
-    padding-right: 4px;
     padding-top: 2px;
     margin-left: auto;
   }
@@ -220,9 +220,11 @@
     background-image: url(send-icon.svg);
   }
 
-  .settings-box {
-    /* margin-top: 15px; */
+
+  .input-message button:focus{
+    outline: 1px solid rgba(29, 171, 206, 0.67);
   }
+
 
   .chars-wrpper {
     margin-top: 20px;
@@ -259,7 +261,7 @@
 
   .char-img {
     margin: 0 auto 12px auto;
-    height: 135px;
+    height: 138px;
     padding: 35px 5px;
     font-size: 16px;
     color: #404040;

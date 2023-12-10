@@ -31,6 +31,12 @@
                 <div class="form-group">
                     {{ csrf_field() }}
                     <button type="submit" class="btn btn-success">Save</button>
+
+                    <label>
+                        Show NSWF Characters            
+                        <input type="hidden" name="nswf" value="">
+                        <input type="checkbox" name="nswf" <?php if(!empty($user['nswf'])){ echo 'checked';} ?> value="1">
+                    </label>
                 </div>
             </form>
 

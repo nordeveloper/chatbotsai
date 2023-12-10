@@ -62,18 +62,6 @@ function replaceCodeWraps(text) {
     return replacedText;
 }  
 
-function htmlspecialchars(str) {
-    const entities = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;',
-      '*': '<i>',
-    };
-    return str.replace(/[&<>"']/g, chr => entities[chr] || chr);
-}
-
 function replaceToImg(text){
     let inputString = '[image]'+text+'[image]';
     return inputString.replace(/\[image\](.*?)\[image\]/g, '<img src="$1">');
@@ -88,6 +76,18 @@ function replacePattern(input) {
 function replaceNewlines(input) {
   let output = input.replace(/\n/g, "<br>");
   return output;
+}
+
+function htmlspecialchars(str) {
+    const entities = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;',
+      '*': '<i>',
+    };
+    return str.replace(/[&<>"']/g, chr => entities[chr] || chr);
 }
 
 function confirm_remove() {

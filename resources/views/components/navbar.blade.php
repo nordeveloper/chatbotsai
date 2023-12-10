@@ -47,7 +47,7 @@
       $charbgimg = 'background-image:url('.$bot['image'].')';
     }
     ?> 
-  <div class="chat-iamge" title="{{$bot['name']}}" style="<?php echo $charbgimg?>"></div> 
+  <a href="{{route('characters.edit', $bot['id'])}}" class="chat-iamge" title="{{$bot['name']}}" style="<?php echo $charbgimg?>"></a> 
 </div>
 @endif
 

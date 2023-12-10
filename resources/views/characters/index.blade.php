@@ -11,9 +11,9 @@
 </div>
 
 <div class="row">
+    @if( !empty($items) && !$items->isEmpty())
     @foreach ($items as $character)
     <div class="col-lg-2 col-md-3 col-sm-6 col-6 char-item-wrapp">
-        <?php //dump($character) ?>
         <div class="char-item">
         <a class="chat-link" href="chat?bot={{$character['code']}}">
         @if($character['char_img'])
@@ -29,6 +29,7 @@
         </div>
     </div>
     @endforeach
+    @endif
 </div>
 
 @endsection

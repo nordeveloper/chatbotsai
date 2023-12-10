@@ -63,12 +63,6 @@
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-success">Save</button>
                     </label>
-        
-                    <label>
-                        Show NSWF Characters            
-                        <input type="hidden" name="nswf" value="">
-                        <input type="checkbox" name="nswf" <?php if(!empty($chatParams['nswf'])){ echo 'checked';} ?> value="1">
-                    </label>
                 </div>
             </form>  
         </div>

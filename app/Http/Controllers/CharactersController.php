@@ -4,12 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Character;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CharactersController extends Controller
 {
     public function index(Request $request){
 
-        $items = Character::get();
+        $dbRes = Character::orderBy('name', 'asc');
+        $user = Auth::user();
+
+        $dbRes->whereNull('nswf');
+
+        if(!empty($user->nswf)){
+            $dbRes->orWhere('nswf', '=', 1);
+        }
+
+        $items = $dbRes->get();
+
         return view('characters.index', compact('items'));
     }
 
@@ -57,7 +68,6 @@ class CharactersController extends Controller
         }
     
    
-        $char_image = null;
         $promptJson = json_encode($character, JSON_UNESCAPED_UNICODE);
         
         $inputData['code'] = $char_code;
@@ -76,17 +86,18 @@ class CharactersController extends Controller
 
         $inputData = $request->input();
 
-        $code = trim( strtolower( str_replace(' ', '_', $request['char_name']) ) );
+        $code = trim( strtolower( str_replace(' ', '_', $request['name']) ) );
 
         $arCharacter = [
-            'name' => trim($request['char_name']),
-            'char_name' => $code,
+            'name' => trim($request['name']),
+            'char_name' => trim($request['name']),
             'code'=>$code,
             'personality' => trim($request['personality']),
             'scenario' => trim($request['scenario']),
             'first_mes' => trim($request['first_mes']),
             'system_prompt' => trim($request['system_prompt']),
-            'user_name' => trim($request['user_name'])
+            'user_name' => trim($request['user_name']),
+            'nswf'=>$request['nswf']
         ];
     
         if (!empty($arCharacter['description'])) {
