@@ -7,11 +7,11 @@
 </span>
 @endif
 
-<h3 class="text-center">Chat Bots AI</h3>
+<h3 class="text-center page-title" style="margin-top:20px">Chat Bots AI</h3>
 <div class="card auth-box">
     
     <div class="card-header">
-        Authorization
+        <p class="h4">Authorization</p>
     </div>
     <form class="card-body" method="POST" action="{{ route('login') }}">
         @csrf

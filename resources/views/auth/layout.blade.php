@@ -8,11 +8,17 @@
     <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">
     <title>Auth</title>
     <style>
-        .auth-box{max-width: 500px; margin: 80px auto auto auto}
+    .auth-box{max-width: 500px; margin: 40px auto auto auto}
+    .wrapper {
+        min-width: 320px;
+        margin: auto;
+        background-color: #f5fff7;
+        height: calc(100vh);
+    }
     </style>
 </head>
-<body>
-    <div class="container">
+<body class="wrapper">
+    <div class="container ">
         @yield('content')
     </div>
 </body>

@@ -9,8 +9,10 @@
     @endif
 
     <div class="card settings-box">
+        <div class="card-header">
+            <h4 class="card-title">Chat Settings</h4>
+        </div>
         <div class="card-body">
-            <h4>Chat Settings</h4>
             <form method="POST" class="row justify-content-center pb-3" action="{{route('settings.save')}}">
                 
                 <div class="form-group col-lg-6">
