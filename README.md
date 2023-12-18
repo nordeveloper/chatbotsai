@@ -1,4 +1,4 @@
-# ChatBotsAI Platform for Laravel
+# Characters ChatBotsAI Platform in Laravel
 
 ChatBotsAI is a versatile Chatbots platform built on Laravel, seamlessly integrating with AI services such as OpenAI and OpenRouterAI. This platform empowers users to create and manage intelligent chatbot characters with a rich set of functionalities.
 
