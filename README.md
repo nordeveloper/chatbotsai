@@ -41,3 +41,6 @@ This project is licensed under the [MIT License](LICENSE) - see the [LICENSE](LI
 
 Get started with intelligent conversations using ChatBotsAI today!
 
+## Desigined and Developed by Norayr Petrosyan
+
+
