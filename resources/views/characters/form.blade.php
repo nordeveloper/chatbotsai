@@ -23,7 +23,7 @@
 
                 <div class="form-group">
                     <label> NSWF Character:          
-                    <input type="hidden" value="">
+                    <input type="hidden" name="nswf" value="">
                     <input type="checkbox" name="nswf" <?php if(!empty($character['nswf'])){ echo 'checked';} ?> value="1">            
                     </label>
                 </div>
@@ -46,23 +46,23 @@
             <div class="col-12">
 
             <div class="form-group">
-                <label>Personality: <span>{char} well be replaced with Char Name</span></label>
+                <label>Persona:: <span>&#123;&#123;char&#125;&#125; well be replaced with Char Name</span></label>
                 <textarea type="text" name="personality" rows="9" class="form-control">{{ (!empty($character['prompt']['personality']) ? $character['prompt']['personality'] : '') }}</textarea>
             </div>
 
             <div class="form-group">
-                <label>Scenario: <span>{char} well be replaced with Char Name</span></label>
+                <label>Scenario: <span>&#123;&#123;char&#125;&#125; well be replaced with Char Name</span></label>
                 <textarea type="text" name="scenario" rows="6" class="form-control">{{ (!empty($character['prompt']['scenario']) ? $character['prompt']['scenario'] : '') }}</textarea>
             </div>
 
             <div class="form-group">
-                <label>First message: <span>{char} well be replaced with Char Name</span></label>
+                <label>First message: <span>&#123;&#123;char&#125;&#125; well be replaced with Char Name</span></label>
                 <textarea type="text" name="first_mes" rows="4" class="form-control">{{ (!empty($character['prompt']['first_mes']) ? $character['prompt']['first_mes'] : '') }}</textarea>
             </div>
 
             <div class="form-group">
                 <label>
-                    AI System Prompt instruction: <span>{char} well be replaced with Char Name</span>
+                    AI instruction System Prompt: <span>&#123;&#123;char&#125;&#125; well be replaced with Char Name</span>
                 </label>
                 <textarea type="text" name="system_prompt" rows="10" class="form-control">{{ (!empty($character['prompt']['system_prompt']) ? $character['prompt']['system_prompt'] : '') }}</textarea>
             </div>

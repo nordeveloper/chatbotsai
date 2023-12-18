@@ -36,7 +36,7 @@
 
 
 @if(Auth::check() && !empty($bot) )
-<div class="char-icon" id="char-icon" data-bot="{{$bot['code']}}" data-botname={{$bot['name']}} data-user="{{Auth::user()->name}}" data-userid="{{Auth::user()->id}}">
+<div class="char-icon" id="char-icon" data-bot="{{$bot['code']}}" data-botname="{{$bot['name']}}" data-user="{{$bot['user_name']}}" data-userid="{{Auth::user()->id}}">
   <div class="char-name">
     <a class="remove-history" href="{{ route('chat.removeHistory', ['bot'=>$bot['code']]) }}">New Chat</a><br>
     <span>{{$bot['name']}}</span>

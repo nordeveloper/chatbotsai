@@ -53,19 +53,18 @@ class CharactersController extends Controller
 
         $user_id = \Auth::id();
 
-        $char_code = trim(strtolower(str_replace(' ', '_', $request['name'])));
+        $char_code = \Str::slug($request['name']);
 
         $character = [
+            'name' => trim($request['name']),
+            'char_name' => trim($request['name']),
             'personality' => trim($request['personality']),
             'scenario' => trim($request['scenario']),
             'first_mes' => trim($request['first_mes']),
+            'user_name' => trim($request['user_name']),
             'system_prompt' => trim($request['system_prompt']),
-            'user_name' => trim($request['user_name'])
+            'nswf'=>$request['nswf']
         ];
-    
-        if (!empty($arData['description'])) {
-            $character['personality'] = $character['personality']. "Description: " . trim($arData['description']) . "\n";
-        }
     
    
         $promptJson = json_encode($character, JSON_UNESCAPED_UNICODE);
@@ -86,29 +85,23 @@ class CharactersController extends Controller
 
         $inputData = $request->input();
 
-        $code = trim( strtolower( str_replace(' ', '_', $request['name']) ) );
+        $bot_code = \Str::slug($request['name']);
 
         $arCharacter = [
             'name' => trim($request['name']),
             'char_name' => trim($request['name']),
-            'code'=>$code,
             'personality' => trim($request['personality']),
             'scenario' => trim($request['scenario']),
             'first_mes' => trim($request['first_mes']),
-            'system_prompt' => trim($request['system_prompt']),
             'user_name' => trim($request['user_name']),
+            'system_prompt' => trim($request['system_prompt']),
             'nswf'=>$request['nswf']
-        ];
-    
-        if (!empty($arCharacter['description'])) {
-            $arCharacter['personality'] = $arCharacter['personality']. "Description: " . trim($arCharacter['description']) . "\n";
-        }
-    
+        ];   
    
         $char_image = null;
         $json = json_encode($arCharacter, JSON_UNESCAPED_UNICODE);
 
-        
+        $inputData['code'] = $bot_code;
         $inputData['prompt'] = $json;
         $character->update($inputData);
 

@@ -119,7 +119,7 @@
   }
 
   .char-icon {
-    min-width: 124px;
+    min-width: 135px;
     max-width: 170px;
     display: flex;
     font-weight: bold;
@@ -346,11 +346,10 @@
     color: #5dbaff;
   }
 
-  .settings-box{
-    max-width: 600px;
-    margin: auto;
+
+  .action-delete{
+    
   }
-  
 
   @keyframes loader1 {
     0% {

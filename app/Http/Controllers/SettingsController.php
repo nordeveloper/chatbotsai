@@ -4,42 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Models\Character;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Http;
 class SettingsController extends Controller
 {
     public function index(Request $request){
 
         $chatParams = $this->load_settings();
 
-        $ai_models = [
-            'gryphe/mythomax-l2-13b',
-            'undi95/toppy-m-7b',
-            'gryphe/mythomist-7b',
-            'openchat/openchat-7b',
-            'nousresearch/nous-capybara-7b',
-            'nousresearch/nous-hermes-llama2-13b',
-            'open-orca/mistral-7b-openorca',
-            'teknium/openhermes-2-mistral-7b',
-            'teknium/openhermes-2.5-mistral-7b',
-            'huggingfaceh4/zephyr-7b-beta',
-            'perplexity/pplx-7b-online',
-            'perplexity/pplx-7b-chat',
-            'lizpreciatior/lzlv-70b-fp16-hf',
-            'mistralai/mistral-7b-instruct',
-            'jondurbin/airoboros-l2-70b',
-            'nousresearch/nous-hermes-llama2-70b',
-            'pygmalionai/mythalion-13b',
-            'haotian-liu/llava-13b',      
-            'meta-llama/llama-2-13b-chat',
-            'meta-llama/llama-2-70b-chat',
-            'google/palm-2-chat-bison',
-            'meta-llama/codellama-34b-instruct',
-            'phind/phind-codellama-34b',
-            'google/palm-2-codechat-bison',
-            'openai/gpt-3.5-turbo',
-            'openai/gpt-3.5-turbo-16k',
-            'openai/gpt-4'
-        ];
+        // $ai_models = [
+        //     'gryphe/mythomax-l2-13b',
+        //     'undi95/toppy-m-7b',
+        //     'gryphe/mythomist-7b',
+        //     'openchat/openchat-7b',
+        //     '01-ai/yi-34b-chat',
+        //     'nousresearch/nous-capybara-7b',
+        //     'nousresearch/nous-hermes-llama2-13b',
+        //     'open-orca/mistral-7b-openorca',
+        //     'teknium/openhermes-2-mistral-7b',
+        //     'teknium/openhermes-2.5-mistral-7b',
+        //     'huggingfaceh4/zephyr-7b-beta',
+        //     'perplexity/pplx-7b-online',
+        //     'perplexity/pplx-7b-chat',
+        //     'lizpreciatior/lzlv-70b-fp16-hf',
+        //     'mistralai/mistral-7b-instruct',
+        //     'jondurbin/airoboros-l2-70b',
+        //     'nousresearch/nous-hermes-llama2-70b',
+        //     'pygmalionai/mythalion-13b',
+        //     'meta-llama/codellama-34b-instruct',
+        //     'openai/gpt-3.5-turbo'
+        // ];
+
+        $aiModels = Http::get('https://openrouter.ai/api/v1/models');
+
+        if(!empty($aiModels->collect()['data'])){
+            $ai_models = $aiModels->collect()['data'];
+            //dd($ai_models);
+        }
 
         return view('settings', compact('ai_models', 'chatParams'));
     }

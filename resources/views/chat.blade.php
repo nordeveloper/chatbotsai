@@ -2,7 +2,12 @@
 @extends('main')
 
 @section('scripts')
+@if( !empty(request()->type) )
+<script type="text/javascript" src="{{asset('js/group_chat.js')}}"></script>
+@else
 <script type="text/javascript" src="{{asset('js/chat.js')}}"></script>
+@endif
+
 @endsection
 
 @section('content')

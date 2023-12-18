@@ -1,6 +1,5 @@
 $( window ).on( "load", function() {
-    let user = $('#char-icon').data('user');
-    getChatHistory(user);
+    getHistory();
 });
 
 $(document).ready(function() {
@@ -13,30 +12,67 @@ $(document).ready(function() {
     });    
 });
 
+
 async function sendGroupMessage(from, to,  msg){
 
-    setTimeout(function(){
-        $('.chat-messages').append('<div class="loader"><div></div><div></div><div></div><div></div></div>');    
-        let data = {
-            bot:to,
-            from_bot:from,
-            msg: msg
-        }
-        $.ajax({
-            url: 'api.php',
-            method: 'POST',
-            async: true,
-            dataType: 'json',
-            data:data
-    
-        }).done(function(resp) {
-    
+    $('.chat-messages').append('<div class="loader"><div></div><div></div><div></div><div></div></div>');    
+    let data = {
+        bot:to,
+        from_bot:from,
+        msg: msg,
+        _token: $('input[name="_token"]').val()
+    }
+    $.ajax({
+        url: 'chat/send',
+        method: 'POST',
+        async: true,
+        dataType: 'json',
+        data:data
+
+    }).done(function(resp) {
+
+        if(resp.text){
+            console.log(resp);
             $('.loader').remove();
             if(resp.text){                    
                 appendMessage(to, 'left', resp.text);
-                sendGroupMessage(data.bot, data.from_bot, resp.text);            
-            }        
-        });
-    }, 30000);
+                setTimeout(function(){                
+                    sendGroupMessage(data.bot, data.from_bot, resp.text); 
+                }, 25000);                           
+            }
+        }
 
+    });
+}
+
+
+async function getHistory() {
+
+    let bot = $('#char-icon').data('bot');
+    let from_bot = $('#char-icon').data('user');
+
+    let data = {bot:bot, from_bot:from_bot}
+
+    $.ajax({
+        url: 'chat/getHistory',
+        method: 'GET',
+        dataType: 'json',
+        async: true,
+        data:data
+
+    }).done( function(resp){
+
+        if(resp){
+            resp.forEach((jsonObject) => {
+
+                if(jsonObject.role=='user'){
+                    appendMessage($('#char-icon').data('user'), 'left', jsonObject.content);
+                }
+                else if(jsonObject.role=='assistant'){
+                    appendMessage($('#char-icon').data('botname'), 'right', jsonObject.content);
+                }
+                scrollToBottom();
+            });
+        }
+    });
 }

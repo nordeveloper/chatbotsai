@@ -9,10 +9,8 @@
     @endif
 
     <div class="card settings-box">
-        <div class="card-header">
-            <h4 class="card-title">Chat Settings</h4>
-        </div>
         <div class="card-body">
+            <h4>Chat Settings</h4>
             <form method="POST" class="row justify-content-center pb-3" action="{{route('settings.save')}}">
                 
                 <div class="form-group col-lg-6">
@@ -54,7 +52,7 @@
                     <option value="">Select Model</option>
                     @if( !empty($ai_models) )
                         @foreach($ai_models as $model)            
-                        <option value="{{$model}}"  @if( !empty($chatParams['model']) && $chatParams['model']==$model) selected @endif>{{$model}}</option>
+                        <option value="{{$model['id']}}"  @if( !empty($chatParams['model']) && $chatParams['model']==$model['id']) selected @endif>{{$model['name']}} Pricre: {{floatval($model['pricing']['completion'])*1000}}</option>
                         @endforeach
                     @endif
                     </select>

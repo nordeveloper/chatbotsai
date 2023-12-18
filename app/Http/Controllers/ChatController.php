@@ -38,12 +38,15 @@ class ChatController extends Controller
 
         try{
             $preparedData = $this->prepareData($request);
+
+            if( empty($preparedData['character']) ){
+                echo json_encode(['text'=>'ERROR Character Bot not found']);
+                exit;
+            }
             
             $chatParams = $preparedData['params'];
             $arHistory = $preparedData['history'];
             $character = $preparedData['character'];
-
-            // dump($arHistory);
     
             $opts = [
                'model' => $chatParams['model'],
@@ -58,13 +61,12 @@ class ChatController extends Controller
             // file_put_contents(storage_path('app/public/chat.log'), print_r($arHistory, true), FILE_APPEND);
            
             $arData['bot_name'] = $character['name'];
-            $arData['user_name'] = $chatParams['user_name'];
+            $arData['user_name'] = $character['user_name'];
+
 
             $airequest = new AiRequest(config('app.aiApiKey'));
 
             $aiRespJson = $airequest->chat($opts);
-
-            //dump($aiRespJson);
 
             if( !empty($aiRespJson) && is_array(json_decode($aiRespJson, 1)) ){
 
@@ -207,32 +209,29 @@ class ChatController extends Controller
 
     protected function getCharacter($char_code){
 
-        $character = Character::where('code', $char_code)->first();   
+        $character = Character::where('code', strtolower($char_code))->first();   
 
         if( !empty($character['prompt']) && json_decode($character['prompt'], true) ) {
 
             $systemPrompt = "";
+            
 
             $charPrompt = json_decode($character['prompt'], true);
             
             if( !empty($charPrompt['system_prompt']) ){
                 $systemPrompt = $charPrompt['system_prompt']."\n";
             }     
-  
-            if( !empty($charPrompt['description']) ){
-                $systemPrompt.= "Description: ". $charPrompt['description']."\n";
-            }
 
             if( !empty($charPrompt['personality']) ){
-                $systemPrompt.= "Personality: ". $charPrompt['personality']."\n";
+                $systemPrompt.= "\n Persona:".$charPrompt['personality'];
             }
 
             if( !empty($charPrompt['scenario']) ){
-                $systemPrompt.= "Scenario: ". $charPrompt['scenario']."\n";
+                $systemPrompt.= "\nScenario: ". $charPrompt['scenario'];
             }
 
             if( !empty($charPrompt['first_mes']) ){
-                $systemPrompt.= "\n"."First message: ".$charPrompt['first_mes'];
+                $systemPrompt.= "\nFirst message: ".$charPrompt['first_mes'];
             }
 
             if( !empty($systemPrompt) ){
@@ -242,6 +241,10 @@ class ChatController extends Controller
                 $character['prompt'] = $systemPrompt;
             }else{
                 $character['prompt'] = '';
+            }
+
+            if(!empty($charPrompt['user_name'])){
+                $character['user_name'] = $charPrompt['user_name'];
             }
 
             return $character;
