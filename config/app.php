@@ -13,7 +13,7 @@ return [
 
     'name' => env('APP_NAME', 'ChatBotsAI'),
 
-    'aiApiKey'=>env('AI_API_KEY', ''),
+    'aiApiKey'=>env('AI_API_KEY', 'YOUR_API_KEY_HERE'),
 
     /*
     |--------------------------------------------------------------------------

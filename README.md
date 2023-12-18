@@ -23,9 +23,7 @@ ChatBotsAI is a versatile Chatbots platform built on Laravel, seamlessly integra
 
 1. Clone the repository: git clone https://github.com/nordeveloper/chatbotsai
 
-2. Follow the installation instructions in the project's documentation to set up the ChatBotsAI platform.
-
-3. Explore the comprehensive documentation to unleash the full potential of the platform.
+2. Write you OpenRouterAi API Key in the .env "AI_API_KEY=You Api key" or config/app.php "aiApiKey" in line 13 'aiApiKey'=>env('AI_API_KEY', 'YOUR_API_KEY_HERE')
 
 ## Contribute:
 
